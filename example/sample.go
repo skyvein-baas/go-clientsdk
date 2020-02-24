@@ -19,6 +19,7 @@ func main() {
 		log.Println(msg, err)
 		return
 	}
+	// 先确认使用的账号有gas
 	log.Println(baasCli.EnsureInvoke("counter", "increase", map[string]string{"key": "t1"}))
 	log.Println(baasCli.EnsureQuery("counter", "get", map[string]string{"key": "t1"}))
 }
