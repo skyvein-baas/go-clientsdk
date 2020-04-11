@@ -33,7 +33,7 @@
 	...
 
 	// 构建client实例
-	node := "http://122.224.183.34:31353"
+	node := "http://[ip:port]"
 	baasCli := baassdk.NewInstance(node)
 	// 登录
 	ok, msg, err := baasCli.EnsureLogin(acct, pwd)
@@ -44,12 +44,12 @@
 
 	// 先确认使用的账号有gas
 	// 合约调用
-	rst, msg, err := baasCli.EnsureInvoke("counter", "increase", map[string]string{"key": "t1"})
+	rst, msg, err := baasCli.EnsureInvoke("mycounter", "increase", map[string]string{"key": "t1"})
 	if rst != "" {
 		log.Println(msg, err)
 		return
 	}
-	rst, msg, err = baasCli.EnsureQuery("counter", "get", map[string]string{"key": "t1"})
+	rst, msg, err = baasCli.EnsureQuery("mycounter", "get", map[string]string{"key": "t1"})
 	if rst != "" {
 		log.Println(msg, err)
 		return
