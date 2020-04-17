@@ -1,8 +1,9 @@
 package main
 
 import (
-	baassdk "git.skyvein.net/service/baas_clientgosdk"
 	"log"
+
+	baassdk "git.skyvein.net/service/baas_clientgosdk"
 )
 
 const (
@@ -20,6 +21,6 @@ func main() {
 		return
 	}
 	// 先确认使用的账号有gas
-	log.Println(baasCli.EnsureInvoke("counter", "increase", map[string]string{"key": "t1"}))
-	log.Println(baasCli.EnsureQuery("counter", "get", map[string]string{"key": "t1"}))
+	log.Println(baasCli.EnsureInvoke("mycounter", "increase", map[string]string{"key": "t1"}))
+	log.Println(baasCli.EnsureQuery("mycounter", "get", map[string]string{"key": "t1"}))
 }

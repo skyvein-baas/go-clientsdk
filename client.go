@@ -1,9 +1,10 @@
 package baas_clientgosdk
 
 const (
-	loginPath  = "/v1/login"
-	invokePath = "/v1/continvoke"
-	queryPath  = "/v1/contquery"
+	loginPath    = "/v1/login"
+	getTokenPath = "/v1/gettoken"
+	invokePath   = "/v1/continvoke"
+	queryPath    = "/v1/contquery"
 )
 
 type ClientInstance struct {
@@ -11,14 +12,13 @@ type ClientInstance struct {
 	Logged bool
 	Token  string
 
-	Acct   string
-	PwdMd5 string
+	Acc *Acct
 }
 
-func (c *ClientInstance) Login(acct, pwd string) (ok bool, msg string, err error) {
+func (c *ClientInstance) Login(acct, pwd string) (ok bool, accP *Acct, msg string, err error) {
 	uri := c.Node + loginPath
 	// pwd = md5Str(pwd)
-	tk, msg, err := ApiLogin(uri, acct, pwd)
+	acc, msg, err := ApiLogin(uri, acct, pwd)
 	if err != nil {
 		return
 	}
@@ -26,8 +26,25 @@ func (c *ClientInstance) Login(acct, pwd string) (ok bool, msg string, err error
 		return
 	}
 	ok = true
+	accP = &acc
+	return
+}
+
+func (c *ClientInstance) GetToken(acc *Acct) (ok bool, msg string, err error) {
+	if acc == nil {
+		return
+	}
+	uri := c.Node + getTokenPath
+	token, msg, err := ApiGettoken(uri, *acc)
+	if err != nil {
+		return
+	}
+	if msg != "" {
+		return
+	}
+	c.Token = token
 	c.Logged = true
-	c.Token = tk
+	ok = true
 	return
 }
 
