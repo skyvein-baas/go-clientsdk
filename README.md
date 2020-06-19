@@ -17,7 +17,7 @@
 
 #### 构建和运行例子
 
-​	``` git clone http://git.skyvein.net:30041/service/baas_clientgosdk.git```
+​	```git clone https://github.com/skyvein-baas/go-clientsdk.git```
 
 ​	```go run example/sample.go```
 
@@ -27,7 +27,7 @@
 
 ```js
 	import (
-		baassdk "git.skyvein.net/service/baas_clientgosdk"
+		baassdk "github.com/skyvein-baas/go-clientsdk"
 	)
 
 	...
